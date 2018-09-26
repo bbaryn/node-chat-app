@@ -11,7 +11,9 @@ describe('generateMessage', () => {
     expect(typeof message.createdAt).toBe('number');
     expect(message).toMatchObject({from, text});
   });
+});
 
+describe('generateLocationMessage', () => {
   it('should generate correct location object', () => {
     const from = 'Tomek';
     const latitude = 15;

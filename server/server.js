@@ -24,11 +24,17 @@ io.on('connection', (socket) => {
     }
 
     socket.join(params.room);
+    const roomList = users.getUserList(params.room);
     users.removeUser(socket.id);
+
+    if (roomList.includes(params.name)) {
+      return callback('That name is already taken. Try another one.');
+    }
+
     users.addUser(socket.id, params.name, params.room);
 
     io.to(params.room).emit('updateList', users.getUserList(params.room));
-    socket.emit('newMessage', generateMessage('Admin', 'Welcome to chat app'));
+    socket.emit('newMessage', generateMessage('Admin', 'Welcome to chat app!'));
     socket.broadcast.to(params.room).emit('newMessage', generateMessage('Admin', `${params.name} has joined.`));
     callback();
   });
@@ -56,7 +62,7 @@ io.on('connection', (socket) => {
 
     if(user) {
       io.to(user.room).emit('updateList', users.getUserList(user.room));
-      io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left room`));
+      io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left room :(`));
     }
   });
 });

@@ -8,6 +8,7 @@ const {isRealString} = require('./utils/validation');
 const {Users} = require('./utils/users');
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
+
 var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
@@ -16,18 +17,20 @@ var users = new Users();
 app.use(express.static(publicPath));
 
 io.on('connection', (socket) => {
-  console.log('New user connected');
+
+  socket.emit('updateRoomList', users.getRoomsList());
 
   socket.on('join', (params, callback) => {
     if (!isRealString(params.name) || !isRealString(params.room)) {
       return callback('Name and room name are required');
     }
 
+    params.room = params.room.toLowerCase();
     socket.join(params.room);
     const roomList = users.getUserList(params.room);
     users.removeUser(socket.id);
 
-    if (roomList.includes(params.name)) {
+    if (params.room.includes(params.name)) {
       return callback('That name is already taken. Try another one.');
     }
 

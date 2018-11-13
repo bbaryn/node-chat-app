@@ -5,3 +5,7 @@ socket.on('updateRoomList', (rooms) => {
     $('#active-rooms').append(`<option value ="${room}">${room}</option>`);
   });
 });
+
+const fillField = (e) => {
+  document.getElementById('input_text').value = e.target.value
+}

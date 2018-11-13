@@ -19,17 +19,17 @@
       </div>
       <div class="form-field">
         <label>Room name</label>
-        <input class="form-field__input" type="text" name="room">
+        <input class="form-field__input" type="text" name="room" id="input_text">
       </div>
       <div class="form-field">
-          <label>Active Rooms</label>
-          <select class="form-field__select" id="active-rooms">
-            <option style="display:none"> -- Select a room -- </option>
-          </select>
-        </div>
-        <div class="form-field">
-          <button>Join</button>
-        </div>
+        <label>Active Rooms</label>
+        <select class="form-field__select" id="active-rooms" onchange="fillField(event)">
+          <option style="display:none"> -- Select a room -- </option>
+        </select>
+      </div>
+      <div class="form-field">
+        <button>Join</button>
+      </div>
     </form>
   </div>
 

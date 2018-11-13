@@ -108,7 +108,6 @@ button:active {
   padding: 10px;
 }
 
-
 .chat {
   display: flex;
 }
@@ -132,6 +131,7 @@ button:active {
 }
 
 .chat__sidebar li {
+  list-style-type: none;
   background: #e6eaee;
   border: 1px solid #e1e1e1;
   border-radius: 5px;
@@ -166,6 +166,11 @@ button:active {
 
 .chat__footer form * {
   margin-right: 10px;
+}
+
+.message-input {
+  outline: none;
+  border-radius: 100px;
 }
 
 .chat__footer input {
